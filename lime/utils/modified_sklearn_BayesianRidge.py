@@ -21,6 +21,7 @@ from math import log
 import numpy as np
 from scipy import linalg
 from scipy.linalg import pinvh
+from sklearn.linear_model._base import _preprocess_data
 
 
 from ._base import LinearModel, _rescale_data
@@ -180,10 +181,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         self.copy_X = copy_X
         self.verbose = verbose
 
-     def _preprocess_data(self, X, y, fit_intercept=True, normalize=False, copy=True, sample_weight=None):
-        # Implement preprocessing or use sklearn's _preprocess_data
-        # You might need to import it: from sklearn.linear_model._base import _preprocess_data
-        return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
+
 
 
     def fit(self, X, y, sample_weight=None):
