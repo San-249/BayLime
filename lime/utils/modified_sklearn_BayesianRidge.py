@@ -21,7 +21,6 @@ from math import log
 import numpy as np
 from scipy import linalg
 from scipy.linalg import pinvh
-from sklearn.linear_model._base import _preprocess_data
 
 
 from ._base import LinearModel, _rescale_data
@@ -31,6 +30,11 @@ from ..utils import check_X_y
 from ..utils.validation import _check_sample_weight
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.utils.validation import check_X_y, check_array
+
+from sklearn.linear_model._base import _preprocess_data
+
+def _preprocess_data(self, X, y, fit_intercept=True, normalize=True, copy=True, sample_weight=None):
+    return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
 
 
 ###############################################################################
