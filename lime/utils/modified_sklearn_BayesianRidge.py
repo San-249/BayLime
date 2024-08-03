@@ -28,12 +28,14 @@ from ..base import RegressorMixin
 from ..utils.extmath import fast_logdet
 from ..utils import check_X_y
 from ..utils.validation import _check_sample_weight
+from sklearn.base import BaseEstimator, RegressorMixin
+from sklearn.utils.validation import check_X_y, check_array
 
 
 ###############################################################################
 # BayesianRidge regression
 
-class BayesianRidge_inf_prior(RegressorMixin, LinearModel):
+class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
     """Bayesian ridge regression.
 
     Fit a Bayesian ridge model. See the Notes section for details on this
@@ -177,6 +179,12 @@ class BayesianRidge_inf_prior(RegressorMixin, LinearModel):
         self.normalize = normalize
         self.copy_X = copy_X
         self.verbose = verbose
+
+     def _preprocess_data(self, X, y, fit_intercept=True, normalize=False, copy=True, sample_weight=None):
+        # Implement preprocessing or use sklearn's _preprocess_data
+        # You might need to import it: from sklearn.linear_model._base import _preprocess_data
+        return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
+
 
     def fit(self, X, y, sample_weight=None):
         """Fit the model
@@ -933,7 +941,7 @@ class ARDRegression(RegressorMixin, LinearModel):
         self.copy_X = copy_X
         self.verbose = verbose
 
-    def fit(self, X, y):
+    def fit(self, X, y, sample_weight=None):
         """Fit the ARDRegression model according to the given training data
         and parameters.
 
