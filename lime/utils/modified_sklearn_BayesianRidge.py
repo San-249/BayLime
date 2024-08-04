@@ -342,9 +342,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         return self 
 
         
-    def _decision_function(self, X):
-        return super()._decision_function(X)
-        
+
     def predict(self, X, return_std=False):
         """Predict using the linear model.
 
@@ -367,7 +365,8 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         y_std : array-like of shape (n_samples,)
             Standard deviation of predictive distribution of query points.
         """
-        y_mean = self._decision_function(X)
+
+         y_mean = super().predict(X)
         if return_std is False:
             return y_mean
         else:
