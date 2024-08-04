@@ -33,7 +33,14 @@ from sklearn.utils.validation import check_X_y, check_array
 
 from sklearn.linear_model._base import _preprocess_data
 
-
+def _rescale_data(X, y, sample_weight):
+    """Rescale data using sample_weight."""
+    sample_weight = np.asarray(sample_weight)
+    sample_weight = np.sqrt(sample_weight)
+    sw_matrix = np.diag(sample_weight)
+    X_rescaled = np.dot(sw_matrix, X)
+    y_rescaled = np.dot(sample_weight, y)
+    return X_rescaled, y_rescaled
 
 
 ###############################################################################
