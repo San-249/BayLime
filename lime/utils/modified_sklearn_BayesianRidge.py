@@ -30,7 +30,7 @@ from ..utils import check_X_y
 from ..utils.validation import _check_sample_weight
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.utils.validation import check_X_y, check_array
-
+from sklearn.linear_model import BayesianRidge
 from sklearn.linear_model._base import _preprocess_data
 
 def _rescale_data(X, y, sample_weight):
@@ -342,7 +342,9 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         return self 
 
         
-
+    def _decision_function(self, X):
+        return super()._decision_function(X)
+        
     def predict(self, X, return_std=False):
         """Predict using the linear model.
 
