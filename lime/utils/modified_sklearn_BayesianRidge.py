@@ -46,7 +46,7 @@ def _rescale_data(X, y, sample_weight):
 ###############################################################################
 # BayesianRidge regression
 
-class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
+class BayesianRidge_inf_prior((BayesianRidge)):
   
     """Bayesian ridge regression.
 
