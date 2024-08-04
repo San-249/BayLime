@@ -193,15 +193,14 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         self.verbose = verbose
             
             
-            
     def _set_intercept(self, X_offset_, y_offset_, X_scale_):
         """Set the intercept"""
         if self.fit_intercept:
             self.intercept_ = y_offset_
-            self.coef_ = self.coef_ / X_scale_
+            if X_scale_ is not None:
+                self.coef_ = self.coef_ / X_scale_
         else:
             self.intercept_ = 0.0
-            self.coef_ = self.coef_
         
         
         
@@ -588,10 +587,10 @@ class BayesianRidge_inf_prior_fit_alpha(RegressorMixin, LinearModel):
         """Set the intercept"""
         if self.fit_intercept:
             self.intercept_ = y_offset_
-            self.coef_ = self.coef_ / X_scale_
+            if X_scale_ is not None:
+                self.coef_ = self.coef_ / X_scale_
         else:
             self.intercept_ = 0.0
-            self.coef_ = self.coef_
             
         
     def fit(self, X, y, sample_weight=None):
@@ -975,10 +974,10 @@ class ARDRegression(RegressorMixin, LinearModel):
         """Set the intercept"""
         if self.fit_intercept:
             self.intercept_ = y_offset_
-            self.coef_ = self.coef_ / X_scale_
+            if X_scale_ is not None:
+                self.coef_ = self.coef_ / X_scale_
         else:
             self.intercept_ = 0.0
-            self.coef_ = self.coef_
             
         
     def fit(self, X, y, sample_weight=None):
