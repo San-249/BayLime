@@ -194,10 +194,10 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
             
             
     def _set_intercept(self, X_offset_, y_offset_, X_scale_):
-        """Set the intercept_
-        """
         if self.fit_intercept:
-            self.intercept_ = y_offset_ - np.dot(X_offset_, self.coef_.T)
+            print(f"X_offset_ shape: {X_offset_.shape}")
+            print(f"self.coef_ shape: {self.coef_.shape}")
+            self.intercept_ = y_offset_ - np.dot(X_offset_, self.coef_)
             self.coef_ = self.coef_ / X_scale_
         else:
             self.intercept_ = 0.
