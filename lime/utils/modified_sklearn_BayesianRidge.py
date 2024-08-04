@@ -178,11 +178,11 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
                  lambda_1=1.e-6, lambda_2=1.e-6, alpha_init=None,
                  lambda_init=None, compute_score=False, fit_intercept=True,
                  normalize=False, copy_X=True, verbose=False):
-        super().__init__(n_iter=n_iter, tol=tol, alpha_1=alpha_1, alpha_2=alpha_2,
-                         lambda_1=lambda_1, lambda_2=lambda_2, alpha_init=alpha_init,
-                         lambda_init=lambda_init, compute_score=compute_score,
-                         fit_intercept=fit_intercept, normalize=normalize,
-                         copy_X=copy_X, verbose=verbose)             
+        super(BayesianRidge_inf_prior, self).__init__(n_iter=n_iter, tol=tol, alpha_1=alpha_1, alpha_2=alpha_2,
+                                                      lambda_1=lambda_1, lambda_2=lambda_2, alpha_init=alpha_init,
+                                                      lambda_init=lambda_init, compute_score=compute_score,
+                                                      fit_intercept=fit_intercept, normalize=normalize,
+                                                      copy_X=copy_X, verbose=verbose)            
         self.n_iter = n_iter
         self.tol = tol
         self.alpha_1 = alpha_1
@@ -371,7 +371,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
             Standard deviation of predictive distribution of query points.
         """
 
-        y_mean =  super().predict(X)
+        y_mean =   super(BayesianRidge_inf_prior, self).predict(X)
         if return_std is False:
             return y_mean
         else:
