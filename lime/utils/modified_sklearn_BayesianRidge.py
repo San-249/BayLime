@@ -33,14 +33,15 @@ from sklearn.utils.validation import check_X_y, check_array
 
 from sklearn.linear_model._base import _preprocess_data
 
-def _preprocess_data(self, X, y, fit_intercept=True, normalize=True, copy=True, sample_weight=None):
-    return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
+
 
 
 ###############################################################################
 # BayesianRidge regression
 
 class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
+    def _preprocess_data(self, X, y, fit_intercept=True, normalize=True, copy=True, sample_weight=None):
+    return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
     """Bayesian ridge regression.
 
     Fit a Bayesian ridge model. See the Notes section for details on this
