@@ -40,8 +40,7 @@ from sklearn.linear_model._base import _preprocess_data
 # BayesianRidge regression
 
 class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
-    def _preprocess_data(self, X, y, fit_intercept=True, normalize=True, copy=True, sample_weight=None):
-    return _preprocess_data(X, y, fit_intercept, normalize, copy, sample_weight=sample_weight)
+  
     """Bayesian ridge regression.
 
     Fit a Bayesian ridge model. See the Notes section for details on this
@@ -220,7 +219,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
             sample_weight = _check_sample_weight(sample_weight, X,
                                                  dtype=X.dtype)
 
-        X, y, X_offset_, y_offset_, X_scale_ = self._preprocess_data(
+        X, y, X_offset_, y_offset_, X_scale_ = _preprocess_data(
             X, y, self.fit_intercept, self.normalize, self.copy_X,
             sample_weight=sample_weight)
 
@@ -603,7 +602,7 @@ class BayesianRidge_inf_prior_fit_alpha(RegressorMixin, LinearModel):
             sample_weight = _check_sample_weight(sample_weight, X,
                                                  dtype=X.dtype)
 
-        X, y, X_offset_, y_offset_, X_scale_ = self._preprocess_data(
+        X, y, X_offset_, y_offset_, X_scale_ = _preprocess_data(
             X, y, self.fit_intercept, self.normalize, self.copy_X,
             sample_weight=sample_weight)
 
@@ -968,7 +967,7 @@ class ARDRegression(RegressorMixin, LinearModel):
         n_samples, n_features = X.shape
         coef_ = np.zeros(n_features)
 
-        X, y, X_offset_, y_offset_, X_scale_ = self._preprocess_data(
+        X, y, X_offset_, y_offset_, X_scale_ = _preprocess_data(
             X, y, self.fit_intercept, self.normalize, self.copy_X)
 
         # Launch the convergence loop
