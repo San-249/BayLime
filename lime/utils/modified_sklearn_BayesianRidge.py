@@ -191,10 +191,21 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         self.normalize = normalize
         self.copy_X = copy_X
         self.verbose = verbose
-
-
-
-
+            
+            
+            
+    def _set_intercept(self, X_offset_, y_offset_, X_scale_):
+        """Set the intercept"""
+        if self.fit_intercept:
+            self.intercept_ = y_offset_
+            self.coef_ = self.coef_ / X_scale_
+        else:
+            self.intercept_ = 0.0
+            self.coef_ = self.coef_
+        
+        
+        
+        
     def fit(self, X, y, sample_weight=None):
         """Fit the model
 
@@ -573,6 +584,16 @@ class BayesianRidge_inf_prior_fit_alpha(RegressorMixin, LinearModel):
         self.copy_X = copy_X
         self.verbose = verbose
 
+    def _set_intercept(self, X_offset_, y_offset_, X_scale_):
+        """Set the intercept"""
+        if self.fit_intercept:
+            self.intercept_ = y_offset_
+            self.coef_ = self.coef_ / X_scale_
+        else:
+            self.intercept_ = 0.0
+            self.coef_ = self.coef_
+            
+        
     def fit(self, X, y, sample_weight=None):
         """Fit the model
 
@@ -950,6 +971,16 @@ class ARDRegression(RegressorMixin, LinearModel):
         self.copy_X = copy_X
         self.verbose = verbose
 
+    def _set_intercept(self, X_offset_, y_offset_, X_scale_):
+        """Set the intercept"""
+        if self.fit_intercept:
+            self.intercept_ = y_offset_
+            self.coef_ = self.coef_ / X_scale_
+        else:
+            self.intercept_ = 0.0
+            self.coef_ = self.coef_
+            
+        
     def fit(self, X, y, sample_weight=None):
         """Fit the ARDRegression model according to the given training data
         and parameters.
