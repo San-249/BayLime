@@ -194,16 +194,15 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
             
             
     def _set_intercept(self, X_offset_, y_offset_, X_scale_):
-        if self.fit_intercept:
-            print(f"X_offset_ shape: {X_offset_.shape}")
-            print(f"self.coef_ shape: {self.coef_.shape}")
-            self.intercept_ = y_offset_ - np.dot(X_offset_, self.coef_ / X_scale_)
-            self.coef_ = self.coef_ / X_scale_
-        else:
-            self.intercept_ = 0.
+    if self.fit_intercept:
+        print(f"X_offset_ shape: {X_offset_.shape}")
+        print(f"self.coef_ shape: {self.coef_.shape}")
+        self.intercept_ = y_offset_ - np.dot(X_offset_, self.coef_)
+        self.coef_ = self.coef_ / X_scale_[:, np.newaxis]
+    else:
+        self.intercept_ = 0.
         
-        
-        
+  
     def fit(self, X, y, sample_weight=None):
         """Fit the model
 
@@ -224,6 +223,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
         -------
         self : returns an instance of self.
         """
+        
 
         if self.n_iter != 0:
             raise ValueError('n_iter can only be 0.'
@@ -339,7 +339,9 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
 
         self._set_intercept(X_offset_, y_offset_, X_scale_)
 
-        return self
+        return self 
+
+        
 
     def predict(self, X, return_std=False):
         """Predict using the linear model.
