@@ -366,7 +366,7 @@ class BayesianRidge_inf_prior(BaseEstimator, RegressorMixin):
             Standard deviation of predictive distribution of query points.
         """
 
-        y_mean = super().predict(X)
+        y_mean = BayesianRidge.predict(X)
         if return_std is False:
             return y_mean
         else:
